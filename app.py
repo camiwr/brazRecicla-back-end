@@ -76,11 +76,10 @@ class ConvolutionalNetwork(LightningModule):
         self.log("test_loss", loss)
         self.log("test_acc", acc)
 
-class_names = ['vidro', 'metal', 'papel', 'plastico']  # Substitua pelos nomes das classes do seu dataset
-
+class_names = ['vidro', 'metal', 'papel', 'plastico'] 
 model = ConvolutionalNetwork(class_names)
 
-model.load_state_dict(torch.load("modelo_Ml_classificacao_residuos.pth", map_location=torch.device('cpu')))
+model.load_state_dict(torch.load("modelo_ML_classificacao_residuos.pth", map_location=torch.device('cpu')))
 model.eval()
 
 transform = transforms.Compose([
@@ -108,4 +107,4 @@ async def classify_image(file: UploadFile = File(...)):
 # Rodar o servidor com Uvicorn
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
